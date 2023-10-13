@@ -30,12 +30,13 @@ struct ContentView: View {
             VStack {
                 HStack {
                     Button("Previous") {
-                        (offsetLink <= 0) ? (offsetLink = 0) : (offsetLink -= 20)
                         linkAPI = "https://pokeapi.co/api/v2/pokemon/?offset=\(offsetLink <= 0 ? 0 : offsetLink-20)&limit=20"
+                        (offsetLink <= 0) ? (offsetLink = 0) : (offsetLink -= 20)
                         Task{
                             await loadData()
                         }
                     }
+                    .disabled(offsetLink <= 0)
                     Spacer()
                     Button("Next") {
                         offsetLink += 20
